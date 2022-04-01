@@ -15,6 +15,7 @@ namespace MarkovLibrary
 
         public MarkovEntry(string key)
         {
+            suffixes = new _2022_Spring_TannerEnsign_MyListLibrary<char>();
             this.substring = key;
             count = 0;
         }
@@ -27,7 +28,14 @@ namespace MarkovLibrary
 
         public override string ToString()
         {
-            return $"'{substring}' ({count}) : {suffixes}";
+            return $"MarkovEntry:'{substring}' ({count}) : {suffixes}";
         }
+
+        private char RandomLetter()
+        {
+            Random rand = new Random();
+            return suffixes[rand.Next(suffixes.Count)];
+        }
+        
     }
 }

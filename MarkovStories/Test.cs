@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MarkovStories
 {
@@ -10,6 +11,17 @@ namespace MarkovStories
             String fileName = Console.ReadLine();
             Console.WriteLine("Pleas input a number");
             int num = Int32.Parse(Console.ReadLine());
+            ReadFile(@"C:\Users\trish\Desktop\Test (2).txt");
+            Console.WriteLine($"{fileName} : {num}");
+        }
+
+
+        private static void ReadFile(string fileLocation)
+        {
+            foreach (string line in File.ReadLines(fileLocation))
+            {
+                
+            }
         }
     }
 }
