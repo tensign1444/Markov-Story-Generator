@@ -32,7 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LinkedListLib">
-      <HintPath>..\..\HW04\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
+      <HintPath>..\..\LinkedListHw\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ListSymbolTable">
+      <HintPath>..\..\HW08\ListSymbolTable\bin\Release\ListSymbolTable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MarkovEntry.cs" />
+    <Compile Include="MarkovModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

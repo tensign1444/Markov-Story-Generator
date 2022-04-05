@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarkovLibrary;
+using System;
 using System.IO;
 
 namespace MarkovStories
@@ -9,19 +10,19 @@ namespace MarkovStories
         {
             Console.WriteLine("Please input file location");
             String fileName = Console.ReadLine();
-            Console.WriteLine("Pleas input a number");
+            Console.WriteLine("Please input a max substring length");
             int num = Int32.Parse(Console.ReadLine());
-            ReadFile(@"C:\Users\trish\Desktop\Test (2).txt");
-            Console.WriteLine($"{fileName} : {num}");
+            Console.WriteLine("Please input a max story length");
+            int length = Int32.Parse(Console.ReadLine());
+            MarkovModel model = new MarkovModel(fileName, num, length);
+
+            model.ReadFile();
+
+            Console.WriteLine(model.ToString());
+
         }
 
 
-        private static void ReadFile(string fileLocation)
-        {
-            foreach (string line in File.ReadLines(fileLocation))
-            {
-                
-            }
-        }
+      
     }
 }

@@ -13,11 +13,12 @@ namespace MarkovLibrary
         private string substring;
         private int count;
 
-        public MarkovEntry(string key)
+        public MarkovEntry(string key, char ch)
         {
             suffixes = new _2022_Spring_TannerEnsign_MyListLibrary<char>();
-            this.substring = key;
+            this.substring = key;          
             count = 0;
+            Add(ch);
         }
 
         public void Add(char ch)
