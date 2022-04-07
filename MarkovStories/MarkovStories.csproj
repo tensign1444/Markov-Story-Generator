@@ -9,4 +9,13 @@
     <ProjectReference Include="..\MarkovLibrary\MarkovLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="LinkedListLib">
+      <HintPath>..\..\HW04\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
+    </Reference>
+    <Reference Include="TreeSymbolTable">
+      <HintPath>..\..\HW09\TreeSymbolTable\bin\Release\TreeSymbolTable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
