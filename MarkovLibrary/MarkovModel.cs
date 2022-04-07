@@ -77,10 +77,11 @@ namespace MarkovLibrary
         /// <param name="text"></param>
         private void Split(string text)
         {
-            while(totalCharCount < text.Length)
+            int end = 0;
+            while (totalCharCount < text.Length)
             {
                 string sub = default;
-                int end = subStringLength + totalCharCount + 1;
+                end = end + subStringLength + totalCharCount + 1;
                 if (end >= text.Length)
                 {
                     sub = text.Substring(totalCharCount);
@@ -172,10 +173,10 @@ namespace MarkovLibrary
         /// <summary>
         /// The main method for generating a story
         /// </summary>
-        public string GenerateStory()
+        public StringBuilder GenerateStory()
         {
             StoryBuilder();
-            return ourStory.ToString();
+            return ourStory;
         }
 
         
@@ -184,14 +185,16 @@ namespace MarkovLibrary
             ourStory.Append(beginning);
             ourStory.Append(GetRandomCharFromKey(beginning));
             int charCount = 0;
-            while(charCount <= storyLength)
+            while(charCount <= maxCharacters)
             {
                 string random = GetRandomString();
                 ourStory.Append(random);
-                ourStory.Append(GetRandomCharFromKey(random));
+                char randomChar = GetRandomCharFromKey(random);
+                ourStory.Append(randomChar);
                 charCount = ourStory.Length;
             }
         }
+
 
         /// <summary>
         /// Gets a random Key for us to add to our string

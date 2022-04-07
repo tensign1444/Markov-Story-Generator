@@ -13,7 +13,7 @@ namespace MarkovStories
             String fileName = @"C:\Users\Darth\Desktop\MarkovTestText\Lincoln.txt";
             Console.WriteLine("Please input a max substring length");
             //int num = Int32.Parse(Console.ReadLine());
-            int num = 10;
+            int num = 20;
             Console.WriteLine("Please input a max story length");
             // int length = Int32.Parse(Console.ReadLine());
             int length = 4000;
