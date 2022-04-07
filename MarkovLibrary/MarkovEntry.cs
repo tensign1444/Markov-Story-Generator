@@ -29,10 +29,10 @@ namespace MarkovLibrary
 
         public override string ToString()
         {
-            return $"MarkovEntry:'{substring}' ({count}) : {suffixes}";
+            return $"MarkovEntry:'{suffixes}'";
         }
 
-        private char RandomLetter()
+        public char RandomLetter()
         {
             Random rand = new Random();
             return suffixes[rand.Next(suffixes.Count)];

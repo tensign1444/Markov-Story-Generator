@@ -31,10 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LinkedListLib">
-      <HintPath>..\..\HW04\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
+    <Reference Include="LinkedListLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LinkedListHw\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
     </Reference>
-    <Reference Include="ListSymbolTable">
+    <Reference Include="ListSymbolTable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\HW08\ListSymbolTable\bin\Release\ListSymbolTable.dll</HintPath>
     </Reference>
     <Reference Include="System" />

@@ -21,6 +21,9 @@ namespace MarkovLibrary
         int totalCharCount;
         int storyLength;
         int tableType; //1 for List Symbol Table, 2 for BST, 3 for .Net SortedDictionary
+        string beginning;
+
+        StringBuilder ourStory;
 
         public MarkovModel(string fileName, int subStringLength, int maxCharacters, int tableType = default)
         {
@@ -30,6 +33,7 @@ namespace MarkovLibrary
             totalCharCount = 0;
             storyLength = 0;
             this.tableType = tableType;
+            ourStory = new StringBuilder();
             DeclareTableType();
 
 
@@ -85,10 +89,12 @@ namespace MarkovLibrary
                 else
                 {
                     sub = text.Substring(totalCharCount, subStringLength + 1);
+                    if (totalCharCount == 0)
+                        beginning = sub.Substring(0, sub.Length - 1);
                     totalCharCount = subStringLength + totalCharCount;
                 }
-                    
-               
+                // C:\Users\Darth\Desktop\MarkovTestText\Lincoln.txt
+
                 char letter = sub[sub.Length - 1];
                 sub = sub.Substring(0, sub.Length - 1);
                 if (!Contains(sub))
@@ -163,5 +169,59 @@ namespace MarkovLibrary
                 return DictionaryTable.ToString();
         }
 
+        /// <summary>
+        /// The main method for generating a story
+        /// </summary>
+        public string GenerateStory()
+        {
+            StoryBuilder();
+            return ourStory.ToString();
+        }
+
+        
+        private void StoryBuilder()
+        {
+            ourStory.Append(beginning);
+            ourStory.Append(GetRandomCharFromKey(beginning));
+            int charCount = 0;
+            while(charCount <= storyLength)
+            {
+                string random = GetRandomString();
+                ourStory.Append(random);
+                ourStory.Append(GetRandomCharFromKey(random));
+                charCount = ourStory.Length;
+            }
+        }
+
+        /// <summary>
+        /// Gets a random Key for us to add to our string
+        /// </summary>
+        /// <returns>string</returns>
+        private string GetRandomString()
+        {
+            Random rand = new Random();
+            if (tableType == 0)
+                return ListTable.GetKey(rand.Next(ListTable.Count));
+            else if (tableType == 1)
+                return TreeTable.GetKey(rand.Next(TreeTable.Count));
+            else
+                return DictionaryTable.ElementAt(rand.Next(DictionaryTable.Count)).Key;
+        }
+
+        /// <summary>
+        /// Gets a random char value from our Values
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>char</returns>
+        private char GetRandomCharFromKey(string key)
+        {
+            Random rand = new Random();
+            if (tableType == 0)
+                return ListTable[key].RandomLetter();
+            else if (tableType == 1)
+                return TreeTable[key].RandomLetter();
+            else
+                return DictionaryTable[key].RandomLetter();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace MarkovStories
         {
             Console.WriteLine("Please input file location");
             // String fileName = Console.ReadLine();
-            String fileName = @"C:\Users\trish\Desktop\Lincoln.txt";
+            String fileName = @"C:\Users\Darth\Desktop\MarkovTestText\Lincoln.txt";
             Console.WriteLine("Please input a max substring length");
             //int num = Int32.Parse(Console.ReadLine());
             int num = 10;
@@ -21,7 +21,7 @@ namespace MarkovStories
 
             model.ReadFile();
 
-            Console.WriteLine(model.ToString());
+            Console.WriteLine(model.GenerateStory());
 
         }
 
