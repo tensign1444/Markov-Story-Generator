@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LinkedListLib">
-      <HintPath>..\..\LinkedListHw\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
+      <HintPath>..\..\HW04\LinkedListLib\bin\Release\netcoreapp3.1\LinkedListLib.dll</HintPath>
     </Reference>
     <Reference Include="ListSymbolTable">
       <HintPath>..\..\HW08\ListSymbolTable\bin\Release\ListSymbolTable.dll</HintPath>
@@ -45,6 +45,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TreeSymbolTable">
+      <HintPath>..\..\HW09\TreeSymbolTable\bin\Release\TreeSymbolTable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MarkovEntry.cs" />

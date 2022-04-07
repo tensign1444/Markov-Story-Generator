@@ -9,12 +9,15 @@ namespace MarkovStories
         static void Main(string[] args)
         {
             Console.WriteLine("Please input file location");
-            String fileName = Console.ReadLine();
+            // String fileName = Console.ReadLine();
+            String fileName = @"C:\Users\trish\Desktop\Lincoln.txt";
             Console.WriteLine("Please input a max substring length");
-            int num = Int32.Parse(Console.ReadLine());
+            //int num = Int32.Parse(Console.ReadLine());
+            int num = 10;
             Console.WriteLine("Please input a max story length");
-            int length = Int32.Parse(Console.ReadLine());
-            MarkovModel model = new MarkovModel(fileName, num, length);
+            // int length = Int32.Parse(Console.ReadLine());
+            int length = 4000;
+            MarkovModel model = new MarkovModel(fileName, num, length, 2);
 
             model.ReadFile();
 
