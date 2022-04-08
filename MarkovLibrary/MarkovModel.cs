@@ -19,11 +19,15 @@ namespace MarkovLibrary
         int subStringLength;
         int maxCharacters;
         int totalCharCount;
-        int storyLength;
+        int Length;
         int tableType; //1 for List Symbol Table, 2 for BST, 3 for .Net SortedDictionary
         string beginning;
 
         StringBuilder ourStory;
+
+        public int TxtDocCount { get; set; } //getter and setter for our count
+        public int NewTxtCount { get; set; } //getter and setter for our count
+
 
         public MarkovModel(string fileName, int subStringLength, int maxCharacters, int tableType = default)
         {
@@ -31,7 +35,6 @@ namespace MarkovLibrary
             this.subStringLength = subStringLength;
             this.maxCharacters = maxCharacters;
             totalCharCount = 0;
-            storyLength = 0;
             this.tableType = tableType;
             ourStory = new StringBuilder();
             DeclareTableType();
@@ -59,6 +62,7 @@ namespace MarkovLibrary
         public void ReadFile()
         {
             string text = File.ReadAllText(fileName);
+            TxtDocCount = text.Length;
             Split(text);
         }
 
@@ -81,7 +85,7 @@ namespace MarkovLibrary
             while (totalCharCount < text.Length)
             {
                 string sub = default;
-                end = end + subStringLength + totalCharCount + 1;
+                end = subStringLength + totalCharCount + 1;
                 if (end >= text.Length)
                 {
                     sub = text.Substring(totalCharCount);
@@ -176,10 +180,13 @@ namespace MarkovLibrary
         public StringBuilder GenerateStory()
         {
             StoryBuilder();
+            NewTxtCount = ourStory.Length;
             return ourStory;
         }
 
-        
+        /// <summary>
+        /// Helper method to build the story with a StringBuilder
+        /// </summary>
         private void StoryBuilder()
         {
             ourStory.Append(beginning);
@@ -193,6 +200,9 @@ namespace MarkovLibrary
                 ourStory.Append(randomChar);
                 charCount = ourStory.Length;
             }
+
+            if (charCount > maxCharacters)
+                ourStory.Remove(maxCharacters, charCount - maxCharacters);
         }
 
 
@@ -226,5 +236,6 @@ namespace MarkovLibrary
             else
                 return DictionaryTable[key].RandomLetter();
         }
+
     }
 }
