@@ -14,14 +14,11 @@ namespace MarkovStories
         static void Main(string[] args)
         {
             Console.WriteLine("Please input file location");
-            // String fileName = Console.ReadLine();
-            fileName = @"C:\Users\trish\Desktop\Lincoln.txt";
+            fileName = Console.ReadLine();
             Console.WriteLine("Please input a max substring length");
-            //int num = Int32.Parse(Console.ReadLine());
-            num = 100;
+            num = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Please input a max story length");
-            // int length = Int32.Parse(Console.ReadLine());
-            length = 1000;
+            length = Int32.Parse(Console.ReadLine());
             GenerateLLST();
             GenerateBST();
             GenerateDictionary();
