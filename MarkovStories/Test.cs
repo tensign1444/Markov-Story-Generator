@@ -10,15 +10,39 @@ namespace MarkovStories
         static int num;
         static int length;
         static string fileName;
-
+        static bool CompleteSentence;
         static void Main(string[] args)
         {
+            bool stopWhileLoop = false;
             Console.WriteLine("Please input file location");
-            fileName = Console.ReadLine();
+            // fileName = Console.ReadLine();
+            fileName = @"C:\Users\trish\Desktop\Lincoln.txt";
             Console.WriteLine("Please input a max substring length");
-            num = Int32.Parse(Console.ReadLine());
+            // num = Int32.Parse(Console.ReadLine());
+            num = 100;
             Console.WriteLine("Please input a max story length");
-            length = Int32.Parse(Console.ReadLine());
+            // length = Int32.Parse(Console.ReadLine());
+            length = 500;
+            Console.WriteLine("Do you want to end with a complete sentence? (Y/N)");
+            while (!stopWhileLoop)
+            {           
+                switch (Console.ReadLine())
+                {
+                    case "Y":
+                        CompleteSentence = true;
+                        stopWhileLoop = true;
+                        break;
+                    case "N":
+                        CompleteSentence = false;
+                        stopWhileLoop = true;
+                        break;
+                    default:
+                        Console.WriteLine("Please insert Y/N");
+                        break;
+                }
+            }
+           
+
             GenerateLLST();
             GenerateBST();
             GenerateDictionary();
@@ -32,7 +56,7 @@ namespace MarkovStories
 
             stopWatch.Start();
 
-            MarkovModel model = new MarkovModel(fileName, num, length, 2);
+            MarkovModel model = new MarkovModel(fileName, num, length, CompleteSentence, 2);
 
             model.ReadFile();
             string story = model.GenerateStory().ToString();
@@ -49,7 +73,7 @@ namespace MarkovStories
 
             stopWatch.Start();
 
-            MarkovModel model = new MarkovModel(fileName, num, length, 0);
+            MarkovModel model = new MarkovModel(fileName, num, length, CompleteSentence, 0);
 
             model.ReadFile();
             string story = model.GenerateStory().ToString();
@@ -66,7 +90,7 @@ namespace MarkovStories
 
             stopWatch.Start();
 
-            MarkovModel model = new MarkovModel(fileName, num, length, 1);
+            MarkovModel model = new MarkovModel(fileName, num, length, CompleteSentence, 1);
             model.ReadFile();
             string story = model.GenerateStory().ToString();
             stopWatch.Stop();

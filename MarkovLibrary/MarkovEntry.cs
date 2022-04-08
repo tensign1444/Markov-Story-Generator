@@ -29,7 +29,7 @@ namespace MarkovLibrary
 
         public override string ToString()
         {
-            return $"MarkovEntry:'{suffixes}'";
+            return $"MarkovEntry:'{suffixes}' + ({count})";
         }
 
         public char RandomLetter()

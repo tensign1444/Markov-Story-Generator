@@ -21,6 +21,7 @@ namespace MarkovLibrary
         int totalCharCount;
         int Length;
         int tableType; //1 for List Symbol Table, 2 for BST, 3 for .Net SortedDictionary
+        bool completeSentences;
         string beginning;
 
         StringBuilder ourStory;
@@ -29,7 +30,7 @@ namespace MarkovLibrary
         public int NewTxtCount { get; set; } //getter and setter for our count
 
 
-        public MarkovModel(string fileName, int subStringLength, int maxCharacters, int tableType = default)
+        public MarkovModel(string fileName, int subStringLength, int maxCharacters, bool completeSentences, int tableType = default)
         {
             this.fileName = fileName;
             this.subStringLength = subStringLength;
@@ -37,6 +38,7 @@ namespace MarkovLibrary
             totalCharCount = 0;
             this.tableType = tableType;
             ourStory = new StringBuilder();
+            this.completeSentences = completeSentences;
             DeclareTableType();
 
 
@@ -180,8 +182,36 @@ namespace MarkovLibrary
         public StringBuilder GenerateStory()
         {
             StoryBuilder();
+            
+
+            if (completeSentences)
+            {
+                char lastItem = ourStory[ourStory.Length - 1];
+                if (!lastItem.Equals('.') && !lastItem.Equals('?') && !lastItem.Equals('!'))
+                    FixEnd();
+            }
             NewTxtCount = ourStory.Length;
             return ourStory;
+        }
+
+        private void FixEnd()
+        {
+            string random = GetRandomString();
+
+            
+            while (!random[random.Length - 1].Equals('.') && !random[random.Length - 1].Equals('!') && !random[random.Length - 1].Equals('?'))
+            {
+                random = GetRandomString();
+                char randomChar = GetRandomCharFromKey(random);
+                random = random + randomChar;
+                foreach (char c in random)
+                {
+                    if (c.Equals('.') || c.Equals('?') || c.Equals('!'))
+                        random = random.Substring(1, random.IndexOf(c));
+                }
+            }
+            ourStory.Append(random);
+
         }
 
         /// <summary>
