@@ -27,59 +27,59 @@ namespace MarkovStories
         static bool CompleteSentence;
         static void Main(string[] args)
         {
-            bool stopWhileLoop = false;
-            Console.WriteLine("Please input file location");
-            fileName = Console.ReadLine();
+                bool stopWhileLoop = false;
+                Console.WriteLine("Please input file location");
+                fileName = Console.ReadLine();
 
 
-            WaitForSubStringLength();
+                WaitForSubStringLength();
 
 
-            WaitForMaxLength();
+                WaitForMaxLength();
 
-            Console.WriteLine("Do you want to end with a complete sentence? (Y/N)");
-            while (!stopWhileLoop)
-             {           
-                 switch (Console.ReadLine().ToUpper())
-                 {
-                     case "Y":
-                         CompleteSentence = true;
-                         stopWhileLoop = true;
-                         break;
-                     case "N":
-                         CompleteSentence = false;
-                         stopWhileLoop = true;
-                         break;
-                     default:
-                         Console.WriteLine("Please insert Y/N");
-                         break;
-                 }
-             }
+                Console.WriteLine("Do you want to end with a complete sentence? (Y/N)");
+                while (!stopWhileLoop)
+                {
+                    switch (Console.ReadLine().ToUpper())
+                    {
+                        case "Y":
+                            CompleteSentence = true;
+                            stopWhileLoop = true;
+                            break;
+                        case "N":
+                            CompleteSentence = false;
+                            stopWhileLoop = true;
+                            break;
+                        default:
+                            Console.WriteLine("Please insert Y/N");
+                            break;
+                    }
+                }
 
-             stopWhileLoop = false;
+                stopWhileLoop = false;
 
-             Console.WriteLine("Do you want to check that the words exist in the original story?(Y/N)");
-             while (!stopWhileLoop)
-             {
-                 switch (Console.ReadLine().ToUpper())
-                 {
-                     case "Y":
-                         checkWords = true;
-                         stopWhileLoop = true;
-                         break;
-                     case "N":
-                         checkWords = false;
-                         stopWhileLoop = true;
-                         break;
-                     default:
-                         Console.WriteLine("Please insert Y/N");
-                         break;
-                 }
-             } 
+                Console.WriteLine("Do you want to check that the words exist in the original story?(Y/N) Note: THIS MAY MESS WITH ENDING A SENTENCE PROPERLY");
+                while (!stopWhileLoop)
+                {
+                    switch (Console.ReadLine().ToUpper())
+                    {
+                        case "Y":
+                            checkWords = true;
+                            stopWhileLoop = true;
+                            break;
+                        case "N":
+                            checkWords = false;
+                            stopWhileLoop = true;
+                            break;
+                        default:
+                            Console.WriteLine("Please insert Y/N");
+                            break;
+                    }
+                }
 
-            GenerateLLST();
-            GenerateBST();
-            GenerateDictionary();
+                GenerateLLST();
+                GenerateBST();
+                GenerateDictionary();
 
         }
 

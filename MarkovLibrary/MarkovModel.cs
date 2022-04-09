@@ -200,14 +200,9 @@ namespace MarkovLibrary
         public StringBuilder GenerateStory()
         {
             StoryBuilder();
-            
 
-            if (completeSentences)
-            {
-                char lastItem = ourStory[ourStory.Length - 1];
-                if (!lastItem.Equals('.') && !lastItem.Equals('?') && !lastItem.Equals('!'))
-                    FixEnd();
-            }
+
+            CompleteSenntence();
 
             if (checkWords)
             {
@@ -218,6 +213,22 @@ namespace MarkovLibrary
             return ourStory;
         }
 
+        /// <summary>
+        /// Checks if the user wants complete sentences
+        /// </summary>
+        private void CompleteSenntence()
+        {
+            if (completeSentences)
+            {
+                char lastItem = ourStory[ourStory.Length - 1];
+                if (!lastItem.Equals('.') && !lastItem.Equals('?') && !lastItem.Equals('!'))
+                    FixEnd();
+            }
+        }
+
+        /// <summary>
+        /// Makes sure that the story doesn't get cut off.
+        /// </summary>
         private void FixEnd()
         {
             string random = GetRandomString();
@@ -308,6 +319,16 @@ namespace MarkovLibrary
             }
 
             ourStory.Clear().Append(string.Join(" ", NewTextArray));
+
+            if(ourStory.Length < maxCharacters)
+            {
+                string random = GetRandomString();
+                ourStory.Append(random);
+                char randomChar = GetRandomCharFromKey(random);
+                ourStory.Append(randomChar);
+                IsValid();
+                
+            }
         }
 
     }
