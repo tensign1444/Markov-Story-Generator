@@ -7,6 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TreeSymbolTable;
 
+/**
+* <author>
+* Tanner Ensign, Nathan Maldonado, Masaya Takahashi
+* </author> 
+* 
+*<summary>
+* This is the MarkovLibray class which uses specific methods and functions to read files
+* along with create a custom story.
+*</summary>
+*
+* <date>
+* 4/9/2022
+* </date> 
+*/
 namespace MarkovLibrary
 {
     public class MarkovModel
@@ -16,12 +30,14 @@ namespace MarkovLibrary
         TreeSymbolTable<string, MarkovEntry> TreeTable;
         SortedDictionary<string, MarkovEntry> DictionaryTable;
         string fileName;
+        string fileText;
         int subStringLength;
         int maxCharacters;
         int totalCharCount;
         int Length;
         int tableType; //1 for List Symbol Table, 2 for BST, 3 for .Net SortedDictionary
         bool completeSentences;
+        bool checkWords;
         string beginning;
 
         StringBuilder ourStory;
@@ -30,15 +46,17 @@ namespace MarkovLibrary
         public int NewTxtCount { get; set; } //getter and setter for our count
 
 
-        public MarkovModel(string fileName, int subStringLength, int maxCharacters, bool completeSentences, int tableType = default)
+        public MarkovModel(string fileName, int subStringLength, int maxCharacters, bool completeSentences, bool checkWords, int tableType = default)
         {
             this.fileName = fileName;
             this.subStringLength = subStringLength;
             this.maxCharacters = maxCharacters;
+            this.fileText = default;
             totalCharCount = 0;
             this.tableType = tableType;
             ourStory = new StringBuilder();
             this.completeSentences = completeSentences;
+            this.checkWords = checkWords;
             DeclareTableType();
 
 
@@ -63,9 +81,9 @@ namespace MarkovLibrary
         /// <param name="fileLocation"></param>
         public void ReadFile()
         {
-            string text = File.ReadAllText(fileName);
-            TxtDocCount = text.Length;
-            Split(text);
+            fileText = File.ReadAllText(fileName);
+            TxtDocCount = fileText.Length;
+            Split(fileText);
         }
 
         /// <summary>
@@ -190,6 +208,12 @@ namespace MarkovLibrary
                 if (!lastItem.Equals('.') && !lastItem.Equals('?') && !lastItem.Equals('!'))
                     FixEnd();
             }
+
+            if (checkWords)
+            {
+                IsValid();
+            }
+
             NewTxtCount = ourStory.Length;
             return ourStory;
         }
@@ -265,6 +289,25 @@ namespace MarkovLibrary
                 return TreeTable[key].RandomLetter();
             else
                 return DictionaryTable[key].RandomLetter();
+        }
+
+        /// <summary>
+        /// Calls our IsValid method which checks if a word exist.
+        /// </summary>
+        private void IsValid()
+        {
+            string[] NewTextArray = ourStory.ToString().Split(' ');
+            string[] OriginalTextArray = fileText.Split(' ');
+            Random rand = new Random();
+            for(int i = 0; i < NewTextArray.Length; i++)
+            {
+                if (!OriginalTextArray.Contains(NewTextArray[i]))
+                {
+                    NewTextArray[i] = OriginalTextArray[rand.Next(OriginalTextArray.Length)];
+                }
+            }
+
+            ourStory.Clear().Append(string.Join(" ", NewTextArray));
         }
 
     }
